@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>やめる — 今の自分から抜け出す3ヶ月</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;500;700&family=Shippori+Mincho:wght@400;500;700&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #1a1714;
+      --paper: #f5f0e8;
+      --warm-mid: #8c7b6b;
+      --accent: #c4432a;
+      --light-line: #ddd5c5;
+      --section-bg: #ede8de;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--paper);
+      color: var(--ink);
+      font-family: 'Noto Sans JP', sans-serif;
+      font-weight: 300;
+      line-height: 1.9;
+      overflow-x: hidden;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 10vw 10vw 8vw;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: 'やめる';
+      position: absolute;
+      right: -2vw;
+      top: 50%;
+      transform: translateY(-50%);
+      font-family: 'Shippori Mincho', serif;
+      font-size: clamp(120px, 20vw, 280px);
+      color: transparent;
+      -webkit-text-stroke: 1px var(--light-line);
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-eyebrow {
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: clamp(11px, 1.2vw, 13px);
+      letter-spacing: 0.25em;
+      color: var(--warm-mid);
+      margin-bottom: 2.5rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.2s forwards;
+    }
+
+    .hero-title {
+      font-family: 'Shippori Mincho', serif;
+      font-size: clamp(28px, 4.5vw, 58px);
+      font-weight: 500;
+      line-height: 1.55;
+      letter-spacing: 0.04em;
+      max-width: 16em;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.4s forwards;
+    }
+
+    .hero-title em {
+      font-style: normal;
+      color: var(--accent);
+    }
+
+    .hero-sub {
+      margin-top: 2.5rem;
+      font-size: clamp(14px, 1.5vw, 16px);
+      color: var(--warm-mid);
+      max-width: 28em;
+      line-height: 2;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.6s forwards;
+    }
+
+    .hero-cta {
+      margin-top: 3.5rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.8s forwards;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      text-decoration: none;
+      font-family: 'Noto Sans JP', sans-serif;
+      font-size: clamp(13px, 1.4vw, 15px);
+      letter-spacing: 0.12em;
+      padding: 1.1em 2.8em;
+      border: none;
+      cursor: pointer;
+      transition: background 0.25s ease, transform 0.2s ease;
+      font-weight: 400;
+    }
+
+    .btn-primary:hover {
+      background: #a33520;
+      transform: translateY(-2px);
+    }
+
+    .btn-price {
+      display: block;
+      margin-top: 0.75rem;
+      font-size: 12px;
+      color: var(--warm-mid);
+      letter-spacing: 0.1em;
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      width: 40px;
+      height: 1px;
+      background: var(--accent);
+      margin: 0 10vw;
+    }
+
+    /* ── EMPATHY ── */
+    .empathy {
+      padding: 8vw 10vw;
+    }
+
+    .section-label {
+      font-size: 11px;
+      letter-spacing: 0.3em;
+      color: var(--warm-mid);
+      margin-bottom: 3rem;
+      text-transform: uppercase;
+    }
+
+    .empathy-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      max-width: 600px;
+    }
+
+    .empathy-list li {
+      font-family: 'Shippori Mincho', serif;
+      font-size: clamp(16px, 2vw, 20px);
+      line-height: 1.8;
+      padding-left: 1.5em;
+      position: relative;
+      color: var(--ink);
+      opacity: 0;
+      transform: translateX(-16px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .empathy-list li.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .empathy-list li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-family: 'Noto Sans JP', sans-serif;
+    }
+
+    .empathy-close {
+      margin-top: 3.5rem;
+      font-size: clamp(14px, 1.6vw, 16px);
+      color: var(--warm-mid);
+      max-width: 480px;
+      line-height: 2;
+      opacity: 0;
+      transition: opacity 0.6s ease 0.3s;
+    }
+
+    .empathy-close.visible {
+      opacity: 1;
+    }
+
+    /* ── WHAT YOU GET ── */
+    .outcome {
+      background: var(--section-bg);
+      padding: 8vw 10vw;
+    }
+
+    .outcome-headline {
+      font-family: 'Shippori Mincho', serif;
+      font-size: clamp(20px, 2.8vw, 32px);
+      font-weight: 500;
+      line-height: 1.6;
+      margin-bottom: 3rem;
+      max-width: 20em;
+    }
+
+    .outcome-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2px;
+      max-width: 800px;
+    }
+
+    .outcome-card {
+      background: var(--paper);
+      padding: 2.5rem 2rem;
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .outcome-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .outcome-card:nth-child(2) { transition-delay: 0.1s; }
+    .outcome-card:nth-child(3) { transition-delay: 0.2s; }
+
+    .outcome-num {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+
+    .outcome-card h3 {
+      font-family: 'Shippori Mincho', serif;
+      font-size: clamp(16px, 1.8vw, 20px);
+      font-weight: 500;
+      margin-bottom: 0.75rem;
+      line-height: 1.5;
+    }
+
+    .outcome-card p {
+      font-size: 13px;
+      color: var(--warm-mid);
+      line-height: 1.9;
+    }
+
+    /* ── STRUCTURE ── */
+    .structure {
+      padding: 8vw 10vw;
+    }
+
+    .structure-intro {
+      max-width: 500px;
+      margin-bottom: 4rem;
+    }
+
+    .structure-intro h2 {
+      font-family: 'Shippori Mincho', serif;
+      font-size: clamp(20px, 2.8vw, 32px);
+      font-weight: 500;
+      margin-bottom: 1rem;
+      line-height: 1.5;
+    }
+
+    .structure-intro p {
+      font-size: 14px;
+      color: var(--warm-mid);
+      line-height: 2;
+    }
+
+    .months {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 0;
+      max-width: 720px;
+      border-top: 1px solid var(--light-line);
+    }
+
+    .month {
+      padding: 2.5rem 2rem 2.5rem 0;
+      border-bottom: 1px solid var(--light-line);
+      border-right: 1px solid var(--light-line);
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .month:last-child {
+      border-right: none;
+    }
+
+    .month.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .month:nth-child(2) { transition-delay: 0.1s; }
+    .month:nth-child(3) { transition-delay: 0.2s; }
+
+    .month-num {
+      font-size: 11px;
+      letter-spacing: 0.25em;
+      color: var(--warm-mid);
+      margin-bottom: 0.75rem;
+    }
+
+    .month-label {
+      font-family: 'Shippori Mincho', serif;
+      font-size: clamp(22px, 3vw, 36px);
+      font-weight: 500;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      line-height: 1;
+    }
+
+    .month p {
+      font-size: 13px;
+      color: var(--warm-mid);
+      line-height: 1.9;
+    }
+
+    /* ── PROFILE ── */
+    .profile {
+      background: var(--ink);
+      color: var(--paper);
+      padding: 8vw 10vw;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6vw;
+      align-items: start;
+    }
+
+    @media (max-width: 700px) {
+      .profile {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .profile-img-wrap {
+      aspect-ratio: 3/4;
+      background: #2e2b28;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      max-width: 320px;
+    }
+
+    .profile-img-placeholder {
+      font-size: 12px;
+      letter-spacing: 0.15em;
+      color: #5a5550;
+      text-align: center;
+      line-height: 2;
+    }
+
+    .profile-content {}
+
+    .profile-content .section-label {
+      color: #7a726a;
+    }
+
+    .profile-name {
+      font-family: 'Shippori Mincho', serif;
+      font-size: clamp(22px, 3vw, 32px);
+      font-weight: 500;
+      margin-bottom: 0.25rem;
+      letter-spacing: 0.06em;
+    }
+
+    .profile-sub {
+      font-size: 12px;
+      letter-spacing: 0.15em;
+      color: #7a726a;
+      margin-bottom: 2rem;
+    }
+
+    .profile-text {
+      font-size: clamp(13px, 1.4vw, 15px);
+      line-height: 2.1;
+      color: #c8c0b4;
+    }
+
+    .profile-text p + p {
+      margin-top: 1.25rem;
+    }
+
+    .profile-text strong {
+      color: var(--paper);
+      font-weight: 400;
+    }
+
+    /* ── TRIAL SESSION ── */
+    .trial {
+      padding: 8vw 10vw;
+      background: var(--section-bg);
+    }
+
+    .trial-inner {
+      max-width: 640px;
+    }
+
+    .trial h2 {
+      font-family: 'Shippori Mincho', serif;
+      font-size: clamp(22px, 3vw, 36px);
+      font-weight: 500;
+      margin-bottom: 1.5rem;
+      line-height: 1.5;
+    }
+
+    .trial-detail {
+      display: flex;
+      gap: 3rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .trial-detail-item {}
+
+    .trial-detail-item .label {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      color: var(--warm-mid);
+      margin-bottom: 0.25rem;
+    }
+
+    .trial-detail-item .value {
+      font-family: 'Shippori Mincho', serif;
+      font-size: clamp(16px, 2vw, 20px);
+    }
+
+    .trial-flow {
+      list-style: none;
+      margin-bottom: 2.5rem;
+      border-left: 1px solid var(--light-line);
+      padding-left: 1.5rem;
+    }
+
+    .trial-flow li {
+      font-size: 14px;
+      color: var(--warm-mid);
+      line-height: 1.8;
+      padding: 0.4rem 0;
+      position: relative;
+    }
+
+    .trial-flow li::before {
+      content: '';
+      position: absolute;
+      left: -1.6rem;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    .trial p {
+      font-size: 13px;
+      color: var(--warm-mid);
+      margin-bottom: 2rem;
+      line-height: 2;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 3rem 10vw;
+      border-top: 1px solid var(--light-line);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    footer .brand {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 16px;
+      letter-spacing: 0.1em;
+    }
+
+    footer .copy {
+      font-size: 11px;
+      color: var(--warm-mid);
+      letter-spacing: 0.1em;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <section class="hero">
+    <p class="hero-eyebrow">自己理解コーチング</p>
+    <h1 class="hero-title">
+      やりたいことより、<br>
+      <em>やめたいこと</em>のほうが<br>
+      先に浮かぶ。
+    </h1>
+    <p class="hero-sub">
+      それは、あなたが怠けているのではありません。<br>
+      やりたくないことを抱えすぎているだけです。
+    </p>
+    <div class="hero-cta">
+      <a href="#trial" class="btn-primary">体験セッションを申し込む</a>
+      <span class="btn-price">60分 ¥9,800（税込）</span>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- EMPATHY -->
+  <section class="empathy">
+    <p class="section-label">こんなことを感じていませんか</p>
+    <ul class="empathy-list">
+      <li>朝起きて、今日もこれをやるのかと思う仕事がある</li>
+      <li>断れずに引き受けたことが、また増えた</li>
+      <li>やりたいことを聞かれると、頭が空白になる</li>
+      <li>充実しているはずなのに、夜になると虚しい</li>
+    </ul>
+    <p class="empathy-close">
+      それは、意志が弱いのではありません。<br>
+      やりたくないことで、1日が埋まっているだけです。
+    </p>
+  </section>
+
+  <!-- OUTCOME -->
+  <section class="outcome">
+    <h2 class="outcome-headline">3ヶ月後、こうなっている状態を目指します</h2>
+    <div class="outcome-cards">
+      <div class="outcome-card">
+        <p class="outcome-num">01</p>
+        <h3>やりたくないことを<br>言語化できている</h3>
+        <p>ぼんやりとした「嫌だ」が、はっきりした言葉になる。</p>
+      </div>
+      <div class="outcome-card">
+        <p class="outcome-num">02</p>
+        <h3>最低3つを<br>実生活から減らせた</h3>
+        <p>決意ではなく、構造として減らす。そのための設計をします。</p>
+      </div>
+      <div class="outcome-card">
+        <p class="outcome-num">03</p>
+        <h3>内側から出てきた<br>1つを始めている</h3>
+        <p>小さくていい。「自分で選んだ」と言えることが大事です。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- STRUCTURE -->
+  <section class="structure">
+    <div class="structure-intro">
+      <h2>3ヶ月の構造</h2>
+      <p>順番に意味があります。まず減らす。減ったスペースで、内側を観る。観えてきたものに、動く。</p>
+    </div>
+    <div class="months">
+      <div class="month">
+        <p class="month-num">MONTH 01</p>
+        <p class="month-label">減らす</p>
+        <p>やりたくないことを棚卸しし、実生活から削減する設計をします。</p>
+      </div>
+      <div class="month">
+        <p class="month-num">MONTH 02</p>
+        <p class="month-label">観る</p>
+        <p>空いたキャパで、内側にあるものに気づきます。答えは出さなくていい月です。</p>
+      </div>
+      <div class="month">
+        <p class="month-num">MONTH 03</p>
+        <p class="month-label">動く</p>
+        <p>内側から出てきたものに従って、最初の一歩を踏み出します。</p>
+      </div>
+    </div>
+    <p style="margin-top: 2rem; font-size: 13px; color: var(--warm-mid);">月2回・90分セッション、計6回。Googleドキュメントのワークシート付き。</p>
+  </section>
+
+  <!-- PROFILE -->
+  <section class="profile">
+    <div class="profile-img-wrap">
+      <p class="profile-img-placeholder">PHOTO<br>（準備中）</p>
+    </div>
+    <div class="profile-content">
+      <p class="section-label">コーチについて</p>
+      <h2 class="profile-name">元木 良和</h2>
+      <p class="profile-sub">自己理解コーチ</p>
+      <div class="profile-text">
+        <p>自己破産、うつ、インドへの渡航——これらはすべて、私が「やめる」を経験した瞬間でした。</p>
+        <p>クレジットカードをなくしたとき、<strong>本当に必要なものだけが残りました。</strong>うつになったとき、自分の限界を初めて知りました。インドで暮らしたとき、何もなくても生きていけると気づきました。</p>
+        <p>やめることは、失うことではありません。<strong>自分に戻るための、最短の道でした。</strong></p>
+        <p>あなたの「やめる」を、一緒に見つけます。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRIAL SESSION -->
+  <section class="trial" id="trial">
+    <div class="trial-inner">
+      <p class="section-label">まずは体験から</p>
+      <h2>体験セッション</h2>
+      <div class="trial-detail">
+        <div class="trial-detail-item">
+          <p class="label">時間</p>
+          <p class="value">60分</p>
+        </div>
+        <div class="trial-detail-item">
+          <p class="label">料金</p>
+          <p class="value">¥9,800（税込）</p>
+        </div>
+        <div class="trial-detail-item">
+          <p class="label">形式</p>
+          <p class="value">オンライン</p>
+        </div>
+      </div>
+      <ul class="trial-flow">
+        <li>今の状況と「やめたいこと」をひとつ書き出す</li>
+        <li>なぜやめられないかの構造を、一緒に見る</li>
+        <li>セッション後、3ヶ月プログラムの案内をします</li>
+      </ul>
+      <p>体験セッション単体でも、気づきをお持ち帰りいただけます。<br>本契約は、セッション後に検討期間を設けてからご判断いただけます。</p>
+      <!-- Stripeリンクをここに差し込んでください -->
+      <a href="STRIPE_LINK_HERE" class="btn-primary">申し込む — ¥9,800</a>
+      <span class="btn-price">※ 決済後、Googleカレンダーより日時をお選びいただけます</span>
+      <!-- 商品名: やめる——今の自分から抜け出す3ヶ月 -->
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p class="brand">やめる</p>
+    <p class="copy">© 2026 元木良和 All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Intersection Observer for scroll animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll(
+      '.empathy-list li, .empathy-close, .outcome-card, .month'
+    ).forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
