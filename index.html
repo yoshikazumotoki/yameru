@@ -249,11 +249,15 @@
     }
 
     .outcome-lead {
-      max-width: 560px;
-      font-size: clamp(14px, 1.5vw, 16px);
-      line-height: 2;
+      max-width: 480px;
+      font-size: clamp(14px, 1.5vw, 15px);
+      line-height: 2.2;
       color: var(--ink);
       margin-bottom: 3rem;
+    }
+
+    .outcome-lead p + p {
+      margin-top: 0.5rem;
     }
 
     .outcome-cards {
@@ -656,10 +660,9 @@
   <section class="outcome">
     <h2 class="outcome-headline">3ヶ月後、こうなっている状態を目指します</h2>
     <p class="outcome-lead">
-      朝起きたとき、「今日もこれをやるのか」と思うことが、少なくとも3つ減っている。<br>
-      その分空いた時間に、自分が本当にやりたいことを、小さくても1つ始めている。<br>
-      「なんとなくこうなった」ではなく、「自分で選んだ」と言える一日が増えている。
-    </p>
+      <p style="max-width:480px; font-size:clamp(14px,1.4vw,15px); line-height:2.2; color:var(--ink); margin-bottom:0.5rem;">朝起きたとき、「今日もこれをやるのか」と思うことが、少なくとも3つ減っている。</p>
+      <p style="max-width:480px; font-size:clamp(14px,1.4vw,15px); line-height:2.2; color:var(--ink); margin-bottom:0.5rem;">その分空いた時間に、自分が本当にやりたいことを、小さくても1つ始めている。</p>
+      <p style="max-width:480px; font-size:clamp(14px,1.4vw,15px); line-height:2.2; color:var(--ink); margin-bottom:3rem;">「なんとなくこうなった」ではなく、「自分で選んだ」と言える一日が増えている。</p>
     <div class="outcome-cards">
       <div class="outcome-card">
         <p class="outcome-num">01</p>
